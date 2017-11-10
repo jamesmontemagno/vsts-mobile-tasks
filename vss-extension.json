@@ -3,8 +3,8 @@
     "id": "motz-mobile-buildtasks",
     "name": "Mobile App Tasks",
     "version": "0.0.1",
-    "publisher": "jamesmontemagno",
-    "public" : true,
+    "publisher": "vs-publisher-473885",
+    "public" : false,
     "repository": {
         "type": "git",
         "uri": "https://github.com/jamesmontemagno/vsts-mobile-tasks"
