@@ -1,0 +1,112 @@
+{
+    "manifestVersion": 1,
+    "id": "motz-mobile-buildtasks",
+    "name": "Mobile App Tasks",
+    "version": "0.0.1",
+    "publisher": "jamesmontemagno",
+    "public" : true,
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/jamesmontemagno/vsts-mobile-tasks"
+    },
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Tasks for building ios and android applications in VSTS.",
+    "categories": [
+        "Build and release"
+    ],
+    "content": {
+        "details": {
+            "path": "README.md"
+        },
+        "license": {
+            "path": "LICENSE"
+        }
+    },
+    "tags": [
+        "version", 
+        "versioning",
+        "build",
+        "replacement",
+        "android", "ios",
+        "xamarin", "xamarin.forms",
+        "package", "manifest", "info.plist"
+    ],
+    "links": {
+        "home": {
+            "uri": "https://montemagno.com"
+        },
+        "repository": {
+            "uri": "https://github.com/jamesmontemagno/vsts-mobile-tasks"
+        },
+        "issues": {
+            "uri": "https://github.com/jamesmontemagno/vsts-mobile-tasks/issues"
+        }
+    },
+    "branding": {
+        "color": "rgb(248,153,56)",
+        "theme": "light"
+    },
+    "icons": {
+        "default": "images/extension-icon.png"        
+    },
+    "files": [
+        {
+            "path": "tasks/AndroidBumpVersion"
+        },
+        {
+            "path": "tasks/AndroidPackageName"
+        },
+        {
+            "path": "tasks/iOSBumpVersion"
+        },
+        {
+            "path": "tasks/iOSBundleIdentifier"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "android-manifest-version",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/AndroidBumpVersion"
+            }
+        },
+        {
+            "id": "android-manifest-package-name",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/AndroidPackageName"
+            }
+        },
+        {
+            "id": "ios-bundle-version",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/iOSBumpVersion"
+            }
+        },
+        {
+            "id": "ios-bundle-identifier",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/iOSBundleIdentifier"
+            }
+        }
+    ]
+}

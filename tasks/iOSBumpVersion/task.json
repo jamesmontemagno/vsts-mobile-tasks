@@ -1,17 +1,21 @@
 {
-    "id": "{{taskguid}}",
-    "name": "{{taskname}}",
-    "friendlyName": "{{taskfriendlyname}}",
-    "description": "{{taskdescription}}",
+    "id": "42284b34-be85-4034-890f-8755ad9f6249",
+    "name": "ios-bundle-version",
+    "friendlyName": "iOS Bundle Version Numbers",
+    "description": "Bump the version of your iOS info.plist file at build time.",
     "helpMarkDown": "",
     "category": "Utility",
-    "author": "{{taskauthor}}",
+    "author": "James Montemagno",
+    "visibility": [
+        "Build",
+        "Release"
+      ],
     "version": {
         "Major": 0,
         "Minor": 1,
         "Patch": 0
     },
-    "instanceNameFormat": "Echo $(samplestring)",
+    "instanceNameFormat": "Bump iOS Versions in $(sourcePath)",
     "groups": [
         {
             "name": "advanced",
@@ -21,34 +25,41 @@
     ],
     "inputs": [
         {
-            "name": "samplepathinput",
+            "name": "sourcePath",
             "type": "filePath",
-            "label": "Sample Path",
+            "label": "iOS info.plist File Path",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "A sample path which is relative to root of repo if empty"
+            "helpMarkDown": "Full path to iOS info.plist file."
         },
         {
-            "name": "samplestring",
+            "name": "versionCodeOffset",
             "type": "string",
-            "label": "Sample String",
-            "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "A sample string"
+            "label": "Version Code Offset",
+            "defaultValue": "0",
+            "required": true,
+            "helpMarkDown": "A number to offset the version code belowby."
         },
         {
-            "name": "samplebool",
-            "type": "boolean",
-            "label": "Sample Boolean",
-            "defaultValue": "false",
-            "required": false,
-            "helpMarkDown": "If this is true, this task will fail if any errors are written to the StandardError stream.",
-            "groupName": "advanced"
+            "name": "versionCode",
+            "type": "string",
+            "label": "Version Code",
+            "defaultValue": "$(Build.BuildId)",
+            "required": true,
+            "helpMarkDown": "Number to set the version code to, must be an integer."
+        },
+        {
+            "name": "versionName",
+            "type": "string",
+            "label": "Version Name (short code)",
+            "defaultValue": "1.0.$(Build.BuildId)",
+            "required": true,
+            "helpMarkDown": "The version number shown to users."
         }
     ],
     "execution": {
-        "Node": {
-            "target": "index.js"
+        "Bash": {
+            "target": "task.sh"
         }
     }
 }

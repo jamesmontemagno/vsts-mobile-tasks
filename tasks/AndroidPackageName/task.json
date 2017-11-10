@@ -1,17 +1,21 @@
 {
-    "id": "{{taskguid}}",
-    "name": "{{taskname}}",
-    "friendlyName": "{{taskfriendlyname}}",
-    "description": "{{taskdescription}}",
+    "id": "a0393340-3465-4b5d-bbc4-0f6b1cd5ae4c",
+    "name": "android-manifest-package-name",
+    "friendlyName": "Android Manifest Package Name",
+    "description": "Change the package name on your android manifest file at build time.",
     "helpMarkDown": "",
     "category": "Utility",
-    "author": "{{taskauthor}}",
+    "author": "James Montemagno",
+    "visibility": [
+        "Build",
+        "Release"
+      ],
     "version": {
         "Major": 0,
         "Minor": 1,
         "Patch": 0
     },
-    "instanceNameFormat": "Echo $(samplestring)",
+    "instanceNameFormat": "Change package name in $(sourcePath)",
     "groups": [
         {
             "name": "advanced",
@@ -21,34 +25,25 @@
     ],
     "inputs": [
         {
-            "name": "samplepathinput",
+            "name": "sourcePath",
             "type": "filePath",
-            "label": "Sample Path",
+            "label": "Android Manifest File Path",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "A sample path which is relative to root of repo if empty"
+            "helpMarkDown": "Full path to android manifest file."
         },
         {
-            "name": "samplestring",
+            "name": "packageName",
             "type": "string",
-            "label": "Sample String",
+            "label": "Package Name",
             "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "A sample string"
-        },
-        {
-            "name": "samplebool",
-            "type": "boolean",
-            "label": "Sample Boolean",
-            "defaultValue": "false",
-            "required": false,
-            "helpMarkDown": "If this is true, this task will fail if any errors are written to the StandardError stream.",
-            "groupName": "advanced"
+            "required": true,
+            "helpMarkDown": "New name to set for the package name in the manifest."
         }
     ],
     "execution": {
-        "Node": {
-            "target": "index.js"
+        "Bash": {
+            "target": "task.sh"
         }
     }
 }

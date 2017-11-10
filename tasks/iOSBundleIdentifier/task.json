@@ -1,17 +1,21 @@
 {
-    "id": "{{taskguid}}",
-    "name": "{{taskname}}",
-    "friendlyName": "{{taskfriendlyname}}",
-    "description": "{{taskdescription}}",
+    "id": "77f3c5c9-713f-4eb6-bd73-42324109ea2e",
+    "name": "ios-bundle-identifier",
+    "friendlyName": "iOS Bundle Identifier",
+    "description": "Change the bundle identifier int he info.plist file at build time.",
     "helpMarkDown": "",
     "category": "Utility",
-    "author": "{{taskauthor}}",
+    "author": "James Montemagno",
+    "visibility": [
+        "Build",
+        "Release"
+      ],
     "version": {
         "Major": 0,
         "Minor": 1,
         "Patch": 0
     },
-    "instanceNameFormat": "Echo $(samplestring)",
+    "instanceNameFormat": "Change identifier in $(sourcePath)",
     "groups": [
         {
             "name": "advanced",
@@ -21,34 +25,25 @@
     ],
     "inputs": [
         {
-            "name": "samplepathinput",
+            "name": "sourcePath",
             "type": "filePath",
-            "label": "Sample Path",
+            "label": "iOS info.Plist File Path",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "A sample path which is relative to root of repo if empty"
+            "helpMarkDown": "Full path to android manifest file."
         },
         {
-            "name": "samplestring",
+            "name": "packageName",
             "type": "string",
-            "label": "Sample String",
+            "label": "Bundle Identifier",
             "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "A sample string"
-        },
-        {
-            "name": "samplebool",
-            "type": "boolean",
-            "label": "Sample Boolean",
-            "defaultValue": "false",
-            "required": false,
-            "helpMarkDown": "If this is true, this task will fail if any errors are written to the StandardError stream.",
-            "groupName": "advanced"
+            "required": true,
+            "helpMarkDown": "New name to set for theidentifier in the info.plist."
         }
     ],
     "execution": {
-        "Node": {
-            "target": "index.js"
+        "Bash": {
+            "target": "task.sh"
         }
     }
 }
