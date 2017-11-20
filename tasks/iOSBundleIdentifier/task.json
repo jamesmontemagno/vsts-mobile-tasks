@@ -1,8 +1,8 @@
 {
     "id": "77f3c5c9-713f-4eb6-bd73-42324109ea2e",
     "name": "ios-bundle-identifier",
-    "friendlyName": "iOS Bundle Identifier",
-    "description": "Change the bundle identifier int he info.plist file at build time.",
+    "friendlyName": "iOS Bundle Identifiers",
+    "description": "Change the bundle identifier and name in the info.plist file at build time.",
     "helpMarkDown": "",
     "category": "Utility",
     "author": "James Montemagno",
@@ -33,17 +33,33 @@
             "helpMarkDown": "Full path to android manifest file."
         },
         {
-            "name": "packageName",
+            "name": "bundleIdentifier",
             "type": "string",
             "label": "Bundle Identifier",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "New name to set for theidentifier in the info.plist."
+            "helpMarkDown": "New name to set for the identifier in the info.plist."
+        },
+        {
+            "name": "bundleName",
+            "type": "string",
+            "label": "Bundle Name",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "New name to set for the name in the info.plist."
+        },
+        {
+            "name": "printFile",
+            "type": "boolean",
+            "label": "Print File",
+            "defaultValue": true,
+            "required": true,
+            "helpMarkDown": "If you would like to print the file contents before and after changing variables."
         }
     ],
     "execution": {
-        "Bash": {
-            "target": "task.sh"
+        "PowerShell3": {
+            "target": "task.ps1"
         }
     }
 }

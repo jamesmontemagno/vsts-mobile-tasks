@@ -39,11 +39,27 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "New name to set for the package name in the manifest."
+        },
+        {
+            "name": "appLabel",
+            "type": "string",
+            "label": "Application Name",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "New name to set for the appliation label in the manifest."
+        },
+        {
+            "name": "printFile",
+            "type": "boolean",
+            "label": "Print File",
+            "defaultValue": true,
+            "required": true,
+            "helpMarkDown": "If you would like to print the file contents before and after changing variables."
         }
     ],
     "execution": {
-        "Bash": {
-            "target": "task.sh"
+        "PowerShell3": {
+            "target": "task.ps1"
         }
     }
 }

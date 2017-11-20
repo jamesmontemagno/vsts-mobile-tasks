@@ -38,7 +38,7 @@
             "label": "Version Code Offset",
             "defaultValue": "0",
             "required": true,
-            "helpMarkDown": "A number to offset the version code belowby."
+            "helpMarkDown": "A number to offset the version code below."
         },
         {
             "name": "versionCode",
@@ -55,11 +55,19 @@
             "defaultValue": "1.0.$(Build.BuildId)",
             "required": true,
             "helpMarkDown": "The version number shown to users."
+        },
+        {
+            "name": "printFile",
+            "type": "boolean",
+            "label": "Print File",
+            "defaultValue": true,
+            "required": true,
+            "helpMarkDown": "If you would like to print the file contents before and after changing variables."
         }
     ],
     "execution": {
-        "Bash": {
-            "target": "task.sh"
+        "PowerShell3": {
+            "target": "task.ps1"
         }
     }
 }

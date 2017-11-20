@@ -1,61 +1,75 @@
 Param(
-  [string]$plist_path,
-  [string]$offset,
-  [string]$versionNumber,
-  [string]$shortCode
+  [string]$sourcePath,
+  [string]$versionCodeOffset,
+  [string]$versionCode,
+  [string]$versionName,
+  [bool]$printFile
 )
 
 # requies parameters
-if(!$plist_path)
+if(!$sourcePath)
 {
-    write-host " [!] Missing required input: plist_path"
+    write-host " [!] Missing required input: sourcePath"
     exit 1
 } 
 
-if(!(Test-Path $plist_path))
+if(!(Test-Path $sourcePath))
 {
-    Write-Host " [!] File doesn't exist at specified Info.plist path: $plist_path"
+    Write-Host " [!] File doesn't exist at specified Info.plist path: $sourcePath"
     exit 1
 }
 
-if(!$versionNumber)
+if(!$versionCode)
 {
-    Write-Host " [!] No versionNumber specified!"
+    Write-Host " [!] No versionCode specified!"
     exit 1
 }
 
 # ---------------------
 # --- Configs:
-Write-Host " (i) Provided Info.plist path: $plist_path"
+Write-Host " (i) Provided Info.plist path: $sourcePath"
 
-if(!$shortCode)
+if($versionName)
 {
-    Write-Host " (i) Version numer: $shortCode"
+    Write-Host " (i) Version name (shortcode): $versionName"
 }
 
-if(!$offset)
+if($versionCodeOffset)
 {
-    Write-Host " (i) Build number offset: $offset"
+    Write-Host " (i) Build number versionCodeOffset: $versionCodeOffset"
 
-    $versionNumber = $versionNumber + $offset
+    $versionCode = $versionCode/1 + $versionCodeOffset/1
 }
 
-Write-Host " (i) Build number: $versionNumber"    
+Write-Host " (i) Build number: $versionCode"    
 
 # ---------------------
 # --- Main:
 
 # ---- Current Bundle Version:
-& /usr/libexec/PlistBuddy -c "Print CFBundleVersion" $plist_path
+
+if($printFile)
+{
+    Write-Host "Original info.Plist:"
+    Get-Content $sourcePath | Write-Host
+}
+
+& /usr/libexec/PlistBuddy -c "Print CFBundleVersion" $sourcePath
 
 # ---- Set Bundle Version:
-& /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $versionNumber" $plist_path
+& /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $versionCode" $sourcePath
 
-if(!$shortCode)
+if($versionName)
 {
     # ---- Current Bundle Short Version String:
-   & /usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" $plist_path
+   & /usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" $sourcePath
 
   # ---- Set Bundle Short Version String:
-  & /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $shortCode" $plist_path   
+  & /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $versionName" $sourcePath   
+}
+
+if($printFile)
+{
+    Write-Host "Final info.Plist:"
+    Get-Content $sourcePath | Write-Host
 }
