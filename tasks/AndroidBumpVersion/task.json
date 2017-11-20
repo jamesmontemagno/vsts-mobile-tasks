@@ -13,7 +13,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 0
+        "Patch": 4
     },
     "instanceNameFormat": "Bump Android Versions in $(sourcePath)",
     "groups": [
@@ -67,7 +67,13 @@
     ],
     "execution": {
         "PowerShell3": {
-            "target": "task.ps1"
+            "target": "task.ps1",
+            "platforms": [
+                "windows",
+                "macOS",
+                "linux"
+            ],
+            "workingDirectory": "$(currentDirectory)"
         }
     }
 }
