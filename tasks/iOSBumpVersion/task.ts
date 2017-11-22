@@ -24,20 +24,20 @@ async function run() {
         
         console.log(' (i) Provided Info.plist path:' + sourcePath);
 
-        if(!isNullOrUndefined)
+        if(!isNullOrUndefined(versionName))
         {
             console.log(' (i) Version Name (shortcode): ' + versionName);
         }
 
-        if(!isNullOrUndefined)
+        if(!isNullOrUndefined(versionCodeOffset))
         {
-            // todo add version code offeset here
+            console.log(' (i) Build number versionCodeOffset: ' + versionCodeOffset);
+            versionCode = String(Number(versionCode)/1 + Number(versionCodeOffset)/1);
         }       
 
         console.log(' (i) Build number: ' + versionCode);
 
         if(!isNullOrUndefined(printFile)){
-            // todo - load plist data
             console.log('Original info.Plist:' + sourcePath);
         }
 
