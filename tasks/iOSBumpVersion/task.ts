@@ -1,11 +1,11 @@
 import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
+import fs = require('fs');
 import mod = require('./taskmod');
 import { isNullOrUndefined } from 'util';
 
 async function run() {
     try {
-        //console.log(process.env["INPUT_SAMPLESTRING"]);
         let tool: trm.ToolRunner;
         if (process.platform == "win32") {
             tl.setResult(tl.TaskResult.Failed, "Task not supported");
@@ -16,7 +16,7 @@ async function run() {
             //tool = mod.plistBuddy("plist.info");
         }
 
-        let sourcePath: String = tl.getInput("sourcePath");
+        let sourcePath: string = tl.getInput("sourcePath");
         let versionCodeOffset: String = tl.getInput("versionCodeOffset");
         let versionCode: String = tl.getInput("versionCode");
         let versionName: String = tl.getInput("versionName");
@@ -38,7 +38,7 @@ async function run() {
         console.log(' (i) Build number: ' + versionCode);
 
         if(!isNullOrUndefined(printFile)){
-            console.log('Original info.Plist:' + sourcePath);
+            console.log('Original info.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
         }
 
         // print bundle version
@@ -59,7 +59,7 @@ async function run() {
         if(!isNullOrUndefined(printFile))
         {
             // todo - load plist data
-            console.log('Final info.Plist:');
+            console.log('Final info.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));
         }
     
         console.log('Task done!');
