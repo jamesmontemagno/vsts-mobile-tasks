@@ -300,6 +300,7 @@ __pycache__/
 
 # typescript and node
 *.taskkey
+*.package-lock.json
 [Bb]uilt/
 
 # VSTS Task
