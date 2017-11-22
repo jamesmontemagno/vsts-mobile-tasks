@@ -13,7 +13,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 4
+        "Patch": 5
     },
     "instanceNameFormat": "Bump iOS Versions in $(sourcePath)",
     "groups": [
@@ -67,7 +67,7 @@
     ],
     "execution": {
         "Node": {
-            "target": "task.js",
+            "target": "built/task.js",
             "workingDirectory": "$(currentDirectory)"
         }
     }
