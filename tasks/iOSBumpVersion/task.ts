@@ -1,7 +1,6 @@
 import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
 import fs = require('fs');
-import mod = require('./taskmod');
 import { isNullOrUndefined } from 'util';
 
 async function run() {
@@ -10,10 +9,6 @@ async function run() {
         if (process.platform == "win32") {
             tl.setResult(tl.TaskResult.Failed, "Task not supported");
             return;
-        }
-        else {
-            let echoPath = tl.which('echo');
-            //tool = mod.plistBuddy("plist.info");
         }
 
         let sourcePath: string = tl.getInput("sourcePath");
@@ -42,18 +37,18 @@ async function run() {
         }
 
         // print bundle version
-        tl.exec("/usr/libexec/PlistBuddy", "-c \"Print CFBundleVersion\" " + sourcePath);
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleVersion\" " + sourcePath);
 
         // update bundle version
-        tl.exec("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleVersion " + versionCode + "\" " + sourcePath);
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleVersion " + versionCode + "\" " + sourcePath);
 
         if(!isNullOrUndefined(versionName))
         {
             // ---- Current Bundle Short Version String:
-            tl.exec("/usr/libexec/PlistBuddy", "-c \"Print CFBundleShortVersionString\" " + sourcePath);
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleShortVersionString\" " + sourcePath);
 
             // ---- Set Bundle Short Version String:
-            tl.exec("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleShortVersionString " + versionName + "\" " + sourcePath);
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleShortVersionString " + versionName + "\" " + sourcePath);
         }
 
         if(!isNullOrUndefined(printFile))
