@@ -51,7 +51,7 @@ async function run() {
             console.log("New appLabel: " + applicationNode.at(0).getProperty("android:label") );
         }
 
-        fs.writeFileSync(sourcePath, xml.toString(), 'utf8');
+        fs.writeFileSync(sourcePath, "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + "\n" + xml.toString(), 'utf8');
         
 
         if(printFile)
