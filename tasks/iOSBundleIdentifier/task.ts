@@ -23,7 +23,35 @@ async function run() {
         }
         
         
+        // print bundle version
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + sourcePath);
 
+        // update bundle version
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleIdentifier " + bundleIdentifier + "\" " + sourcePath);
+
+         // print bundle version
+         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + sourcePath);
+
+
+         if(!isNullOrUndefined(sourcePath))
+        {
+            // print bundle version
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
+
+            // update bundle version
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleName " + bundleName + "\" " + sourcePath);
+
+            // print bundle version
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
+        }
+
+
+
+        if(!isNullOrUndefined(printFile))
+        {
+            // todo - load plist data
+            console.log('Final info.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));
+        }
         
         console.log('Task done!');
     }
