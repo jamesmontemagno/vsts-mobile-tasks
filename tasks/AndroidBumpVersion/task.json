@@ -66,13 +66,8 @@
         }
     ],
     "execution": {
-        "PowerShell3": {
-            "target": "task.ps1",
-            "platforms": [
-                "windows",
-                "macOS",
-                "linux"
-            ],
+        "Node": {
+            "target": "built/task.js",
             "workingDirectory": "$(currentDirectory)"
         }
     }
