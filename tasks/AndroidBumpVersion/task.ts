@@ -7,10 +7,6 @@ import { isNullOrUndefined } from 'util';
 async function run() {
     try {
         let tool: trm.ToolRunner;
-        if (process.platform == "win32") {
-            tl.setResult(tl.TaskResult.Failed, "Task not supported");
-            return;
-        }
 
         let sourcePath: string = tl.getInput("sourcePath");
         let versionCodeOffset: String = tl.getInput("versionCodeOffset");
@@ -33,14 +29,15 @@ async function run() {
 
         console.log(' (i) versionCode: ' + versionCode);
 
+        let xmlString: String = fs.readFileSync(sourcePath, 'utf8');
+        let xml: library.XML = new library.XML(xmlString);
+
         if(!isNullOrUndefined(printFile))
         {
             console.log('Original info.Plist:' + xmlString);
         }
 
         
-        let xmlString: String = fs.readFileSync(sourcePath, 'utf8');
-        let xml: library.XML = new library.XML(xmlString);
 
         //Update package name here
         console.log( xml.has("manifest") ); // true
@@ -60,6 +57,8 @@ async function run() {
 
             console.log("New versionName: " + manifestNode.at(0).getProperty("android:versionName") );
         }
+
+        fs.writeFileSync(sourcePath, xml.toString(), 'utf8');
 
 
         if(!isNullOrUndefined(printFile))

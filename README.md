@@ -2,7 +2,7 @@
 
 These tasks help automate bumping version numbers and changing package names at build time.
 
-Require Powershell or Powershell Core to be installed on build agent.
+You will find each script is written as a bash script, powershell core script, and a typescript script for you to use in your own project. The typescript version is used in VSTS as it is supported cross-platform.
 
 ## Android
 Multiple tasks to update the AndroidManifest.xml file

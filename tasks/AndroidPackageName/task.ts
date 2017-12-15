@@ -7,10 +7,6 @@ import { isNullOrUndefined } from 'util';
 async function run() {
     try {
         let tool: trm.ToolRunner;
-        if (process.platform == "win32") {
-            tl.setResult(tl.TaskResult.Failed, "Task not supported");
-            return;
-        }
 
         let sourcePath: string = tl.getInput("sourcePath");
         let packageName: String = tl.getInput("packageName");
@@ -55,6 +51,7 @@ async function run() {
             console.log("New appLabel: " + applicationNode.at(0).getProperty("android:label") );
         }
 
+        fs.writeFileSync(sourcePath, xml.toString(), 'utf8');
         
 
         if(!isNullOrUndefined(printFile))
