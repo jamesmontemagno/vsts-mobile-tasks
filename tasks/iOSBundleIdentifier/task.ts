@@ -19,11 +19,50 @@ async function run() {
         // requires parameters
         if(!isNullOrUndefined(sourcePath))
         {
-            throw new Error("[!] Missing required input: sourcePath");
+            throw new Error(" [!] Missing required input: sourcePath");
         }
-        
-        
 
+        if(!isNullOrUndefined(bundleIdentifier))
+        {
+            throw new Error(" [!] No bundleIdentifier specified!");
+        }
+
+        // Configs:
+        console.log(" (i) Provided Info.plist path: " + sourcePath);
+        console.log(" (i) Bundle Identifier: " + bundleIdentifier);
+
+        // Main:
+        if(printFile)
+        {
+            console.log("Original info.Plist:");
+            console.log(fs.readFileSync(sourcePath));
+        }
+
+        // Current Bundle Version:
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + sourcePath);
+
+        // Set Bundle Version:
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleIdentifier " + bundleIdentifier + "\" " + sourcePath);
+
+        // New Bundle Version
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
+
+        if(bundleName)
+        {
+            // Current Bundle Short Version String:
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
+            
+            // Set Bundle Short Version String
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleName " + bundleName + "\" " + sourcePath);
+
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
+        }
+
+        if(printFile)
+        {
+            console.log("Final info.Plist:");
+            console.log(fs.readFileSync(sourcePath));
+        }
         
         console.log('Task done!');
     }
