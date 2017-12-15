@@ -19,38 +19,49 @@ async function run() {
         // requires parameters
         if(!isNullOrUndefined(sourcePath))
         {
-            throw new Error("[!] Missing required input: sourcePath");
+            throw new Error(" [!] Missing required input: sourcePath");
         }
-        
-        
-        // print bundle version
+
+        if(!isNullOrUndefined(bundleIdentifier))
+        {
+            throw new Error(" [!] No bundleIdentifier specified!");
+        }
+
+        // Configs:
+        console.log(" (i) Provided Info.plist path: " + sourcePath);
+        console.log(" (i) Bundle Identifier: " + bundleIdentifier);
+
+        // Main:
+        if(printFile)
+        {
+            console.log("Original info.Plist:");
+            console.log(fs.readFileSync(sourcePath));
+        }
+
+        // Current Bundle Version:
         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + sourcePath);
 
-        // update bundle version
+        // Set Bundle Version:
         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleIdentifier " + bundleIdentifier + "\" " + sourcePath);
 
-         // print bundle version
-         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + sourcePath);
+        // New Bundle Version
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
 
-
-         if(!isNullOrUndefined(sourcePath))
+        if(bundleName)
         {
-            // print bundle version
+            // Current Bundle Short Version String:
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
-
-            // update bundle version
+            
+            // Set Bundle Short Version String
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleName " + bundleName + "\" " + sourcePath);
 
-            // print bundle version
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
         }
 
-
-
-        if(!isNullOrUndefined(printFile))
+        if(printFile)
         {
-            // todo - load plist data
-            console.log('Final info.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));
+            console.log("Final info.Plist:");
+            console.log(fs.readFileSync(sourcePath));
         }
         
         console.log('Task done!');
