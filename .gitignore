@@ -297,3 +297,11 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+# typescript and node
+*.taskkey
+*.package-lock.json
+[Bb]uilt/
+
+# VSTS Task
+*.vsix

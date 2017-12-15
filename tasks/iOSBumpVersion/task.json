@@ -13,7 +13,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 4
+        "Patch": 10
     },
     "instanceNameFormat": "Bump iOS Versions in $(sourcePath)",
     "groups": [
@@ -66,13 +66,8 @@
         }
     ],
     "execution": {
-        "PowerShell3": {
-            "target": "task.ps1",
-            "platforms": [
-                "windows",
-                "macOS",
-                "linux"
-            ],
+        "Node": {
+            "target": "built/task.js",
             "workingDirectory": "$(currentDirectory)"
         }
     }
