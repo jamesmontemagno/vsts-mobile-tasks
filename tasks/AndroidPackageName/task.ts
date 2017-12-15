@@ -20,23 +20,24 @@ async function run() {
         }
 
         let xmlString: string = fs.readFileSync(sourcePath, 'utf8');
+        
         let xml: sam.library.XML = new sam.library.XML(xmlString);
 
+        console.log('Original xmlString:' + xmlString);
+        console.log('Original XML:' + xml.toString());
 
         if(printFile)
         {
             console.log('Original manifest:' + fs.readFileSync(sourcePath, 'utf8'));
         }
 
-
         //Update package name here
-        console.log( xml.has("manifest") ); // true
-        let manifestNode: sam.library.XMLList = xml.get("manifest");
-        console.log("Old package: " + manifestNode.at(0).getProperty("package") );
+        console.log( xml.findProperty("packag") ); // true
+        console.log("Old package: " + xml.getProperty("package") );
 
-        manifestNode.at(0).setProperty("package", packageName);
+        xml.setProperty("package", packageName);
 
-        console.log("New package: " + manifestNode.at(0).getProperty("package") );
+        console.log("New package: " + xml.getProperty("package") );
         
 
         

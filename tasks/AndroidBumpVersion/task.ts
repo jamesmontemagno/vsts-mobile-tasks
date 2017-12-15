@@ -38,22 +38,22 @@ async function run() {
         }
 
         //Update package name here
-        console.log( xml.has("manifest") ); // true
-        let manifestNode: sam.library.XMLList = xml.get("manifest");
-        console.log("Old versionCode: " + manifestNode.at(0).getProperty("android:versionCode") );
+        console.log( xml.hasProperty("android:versionCode") ); // true
+        console.log("Old versionCode: " +  xml.getProperty("android:versionCode") );
 
-        manifestNode.at(0).setProperty("android:versionCode", versionCode);
+        xml.setProperty("android:versionCode", versionCode);
 
-        console.log("New versionCode: " + manifestNode.at(0).getProperty("android:versionCode") );
+        console.log("New versionCode: " + xml.getProperty("android:versionCode") );
         
 
         if(!isNullOrUndefined(versionName))
         {
-            console.log("Old versionName: " + manifestNode.at(0).getProperty("android:versionName") );
+            console.log( xml.hasProperty("android:versionName") ); // true
+            console.log("Old versionName: " + xml.getProperty("android:versionName") );
 
-            manifestNode.at(0).setProperty("android:versionName", versionName);
+            xml.setProperty("android:versionName", versionName);
 
-            console.log("New versionName: " + manifestNode.at(0).getProperty("android:versionName") );
+            console.log("New versionName: " +xml.getProperty("android:versionName") );
         }
 
         fs.writeFileSync(sourcePath, xml.toString(), 'utf8');
