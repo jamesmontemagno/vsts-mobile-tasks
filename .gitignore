@@ -305,3 +305,4 @@ __pycache__/
 
 # VSTS Task
 *.vsix
+AndroidManifest.xml
