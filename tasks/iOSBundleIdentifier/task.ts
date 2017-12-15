@@ -21,7 +21,13 @@ async function run() {
         {
             throw new Error("[!] Missing required input: sourcePath");
         }
+
+        if(!isNullOrUndefined(printFile))
+        {
+            console.log('Original info.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
+        }
         
+        console.log(' (i) Bundle Identifier- bundleIdentifier: ' + bundleIdentifier);
         
         // print bundle version
         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + sourcePath);
@@ -33,8 +39,10 @@ async function run() {
          tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + sourcePath);
 
 
-         if(!isNullOrUndefined(sourcePath))
+        if(!isNullOrUndefined(bundleName))
         {
+            console.log(' (i) Bunglde Name- bundleName: ' + bundleName);
+
             // print bundle version
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
 
