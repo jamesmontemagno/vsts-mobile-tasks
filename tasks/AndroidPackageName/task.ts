@@ -23,8 +23,6 @@ async function run() {
         
         let xml: sam.library.XML = new sam.library.XML(xmlString);
 
-        console.log('Original xmlString:' + xmlString);
-        console.log('Original XML:' + xml.toString());
 
         if(printFile)
         {
@@ -32,7 +30,7 @@ async function run() {
         }
 
         //Update package name here
-        console.log( xml.findProperty("packag") ); // true
+        console.log( xml.hasProperty("package") ); // true
         console.log("Old package: " + xml.getProperty("package") );
 
         xml.setProperty("package", packageName);

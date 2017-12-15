@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "motz-mobile-buildtasks",
     "name": "Mobile App Tasks for iOS and Android",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "publisher": "vs-publisher-473885",
     "public" : false,
     "repository": {
