@@ -19,6 +19,17 @@ async function run() {
         
         console.log(' (i) Provided Info.plist path:' + sourcePath);
 
+         // requires parameters
+         if(isNullOrUndefined(sourcePath))
+         {
+             throw new Error("[!] Missing required input: sourcePath");
+         }
+
+        if(printFile)
+        {
+            console.log('Original info.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
+        }
+
         if(!isNullOrUndefined(versionName))
         {
             console.log(' (i) Version Name (shortcode): ' + versionName);
@@ -51,7 +62,7 @@ async function run() {
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleShortVersionString " + versionName + "\" " + sourcePath);
         }
 
-        if(!isNullOrUndefined(printFile))
+        if(printFile)
         {
             // todo - load plist data
             console.log('Final info.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));

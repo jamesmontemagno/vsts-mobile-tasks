@@ -17,12 +17,12 @@ async function run() {
         let printFile: Boolean = new Boolean(tl.getInput("printFile")).valueOf();
         
         // requires parameters
-        if(!isNullOrUndefined(sourcePath))
+        if(isNullOrUndefined(sourcePath))
         {
             throw new Error("[!] Missing required input: sourcePath");
         }
 
-        if(!isNullOrUndefined(printFile))
+        if(printFile)
         {
             console.log('Original info.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
         }
@@ -55,7 +55,7 @@ async function run() {
 
 
 
-        if(!isNullOrUndefined(printFile))
+        if(printFile)
         {
             // todo - load plist data
             console.log('Final info.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));

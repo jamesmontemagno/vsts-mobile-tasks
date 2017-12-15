@@ -1,7 +1,7 @@
 import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
 import fs = require('fs');
-import library = require('samchon-framework').library;
+import sam = require('samchon-framework');
 import { isNullOrUndefined } from 'util';
 
 async function run() {
@@ -9,28 +9,29 @@ async function run() {
         let tool: trm.ToolRunner;
 
         let sourcePath: string = tl.getInput("sourcePath");
-        let packageName: String = tl.getInput("packageName");
-        let appLabel: String = tl.getInput("appLabel");
+        let packageName: string = tl.getInput("packageName");
+        let appLabel: string = tl.getInput("appLabel");
         let printFile: Boolean = new Boolean(tl.getInput("printFile")).valueOf();
         
         // requires parameters
-        if(!isNullOrUndefined(sourcePath))
+        if(isNullOrUndefined(sourcePath))
         {
             throw new Error("[!] Missing required input: sourcePath");
         }
 
-        let xmlString: String = fs.readFileSync(sourcePath, 'utf8');
-        let xml: library.XML = new library.XML(xmlString);
+        let xmlString: string = fs.readFileSync(sourcePath, 'utf8');
+        let xml: sam.library.XML = new sam.library.XML(xmlString);
 
 
-        if(!isNullOrUndefined(printFile))
+        if(printFile)
         {
-            console.log('Original info.Plist:' + xmlString);
+            console.log('Original manifest:' + fs.readFileSync(sourcePath, 'utf8'));
         }
+
 
         //Update package name here
         console.log( xml.has("manifest") ); // true
-        let manifestNode: library.XMLList = xml.get("manifest");
+        let manifestNode: sam.library.XMLList = xml.get("manifest");
         console.log("Old package: " + manifestNode.at(0).getProperty("package") );
 
         manifestNode.at(0).setProperty("package", packageName);
@@ -43,7 +44,7 @@ async function run() {
         if(!isNullOrUndefined(appLabel))
         {
             console.log( xml.has("application") ); // true
-            let applicationNode: library.XMLList = xml.get("application");
+            let applicationNode: sam.library.XMLList = xml.get("application");
             console.log("Old appLabel: " + applicationNode.at(0).getProperty("android:label") );
 
             applicationNode.at(0).setProperty("android:label", appLabel);
@@ -54,10 +55,10 @@ async function run() {
         fs.writeFileSync(sourcePath, xml.toString(), 'utf8');
         
 
-        if(!isNullOrUndefined(printFile))
+        if(printFile)
         {
             // todo - load plist data
-            console.log('Final info.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));
+            console.log('Final manifest: ' + fs.readFileSync(sourcePath, 'utf8'));
         }
         
         console.log('Task done!');

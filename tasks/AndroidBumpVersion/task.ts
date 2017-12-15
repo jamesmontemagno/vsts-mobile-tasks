@@ -1,7 +1,7 @@
 import tl = require('vsts-task-lib/task');
 import trm = require('vsts-task-lib/toolrunner');
 import fs = require('fs');
-import library = require('samchon-framework').library;
+import sam = require('samchon-framework');
 import { isNullOrUndefined } from 'util';
 
 async function run() {
@@ -9,9 +9,9 @@ async function run() {
         let tool: trm.ToolRunner;
 
         let sourcePath: string = tl.getInput("sourcePath");
-        let versionCodeOffset: String = tl.getInput("versionCodeOffset");
-        let versionCode: String = tl.getInput("versionCode");
-        let versionName: String = tl.getInput("versionName");
+        let versionCodeOffset: string = tl.getInput("versionCodeOffset");
+        let versionCode: string = tl.getInput("versionCode");
+        let versionName: string = tl.getInput("versionName");
         let printFile: Boolean = new Boolean(tl.getInput("printFile")).valueOf();
         
         console.log(' (i) Provided Info.plist path:' + sourcePath);
@@ -21,7 +21,7 @@ async function run() {
             console.log(' (i) Version Name (shortcode): ' + versionName);
         }
 
-        if(!isNullOrUndefined(versionCodeOffset))
+        if(isNullOrUndefined(versionCodeOffset))
         {
             console.log(' (i) versionCodeOffset: ' + versionCodeOffset);
             versionCode = String(Number(versionCode)/1 + Number(versionCodeOffset)/1);
@@ -29,19 +29,17 @@ async function run() {
 
         console.log(' (i) versionCode: ' + versionCode);
 
-        let xmlString: String = fs.readFileSync(sourcePath, 'utf8');
-        let xml: library.XML = new library.XML(xmlString);
+        let xmlString: string = fs.readFileSync(sourcePath, 'utf8');
+        let xml: sam.library.XML = new sam.library.XML(xmlString);
 
-        if(!isNullOrUndefined(printFile))
+        if(printFile)
         {
-            console.log('Original info.Plist:' + xmlString);
+            console.log('Original manifest:' + fs.readFileSync(sourcePath, 'utf8'));
         }
-
-        
 
         //Update package name here
         console.log( xml.has("manifest") ); // true
-        let manifestNode: library.XMLList = xml.get("manifest");
+        let manifestNode: sam.library.XMLList = xml.get("manifest");
         console.log("Old versionCode: " + manifestNode.at(0).getProperty("android:versionCode") );
 
         manifestNode.at(0).setProperty("android:versionCode", versionCode);
@@ -61,12 +59,11 @@ async function run() {
         fs.writeFileSync(sourcePath, xml.toString(), 'utf8');
 
 
-        if(!isNullOrUndefined(printFile))
+        if(printFile)
         {
             // todo - load plist data
-            console.log('Final info.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));
+            console.log('Final manifest: ' + fs.readFileSync(sourcePath, 'utf8'));
         }
-        
     
         console.log('Task done!');
     }
