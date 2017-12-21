@@ -2,9 +2,9 @@
     "manifestVersion": 1,
     "id": "motz-mobile-buildtasks",
     "name": "Mobile App Tasks for iOS and Android",
-    "version": "0.3.2",
+    "version": "0.4.0",
     "publisher": "vs-publisher-473885",
-    "public" : false,
+    "public" : true,
     "repository": {
         "type": "git",
         "uri": "https://github.com/jamesmontemagno/vsts-mobile-tasks"

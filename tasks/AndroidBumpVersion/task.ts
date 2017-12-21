@@ -21,7 +21,7 @@ async function run() {
             console.log(' (i) Version Name (shortcode): ' + versionName);
         }
 
-        if(isNullOrUndefined(versionCodeOffset))
+        if(!isNullOrUndefined(versionCodeOffset))
         {
             console.log(' (i) versionCodeOffset: ' + versionCodeOffset);
             versionCode = String(Number(versionCode)/1 + Number(versionCodeOffset)/1);
