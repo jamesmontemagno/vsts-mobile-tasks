@@ -12,7 +12,7 @@
       ],
     "version": {
         "Major": 0,
-        "Minor": 4,
+        "Minor": 5,
         "Patch": 0
     },
     "instanceNameFormat": "Change package name in $(sourcePath)",
@@ -46,7 +46,7 @@
             "label": "Application Name",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "New name to set for the appliation label in the manifest."
+            "helpMarkDown": "New name to set for the appliation label in the manifest (leave blank to use existing value in AndroidManifest.xml)."
         },
         {
             "name": "printFile",

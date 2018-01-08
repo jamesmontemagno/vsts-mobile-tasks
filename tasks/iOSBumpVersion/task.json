@@ -12,7 +12,7 @@
       ],
     "version": {
         "Major": 0,
-        "Minor": 4,
+        "Minor": 5,
         "Patch": 0
     },
     "instanceNameFormat": "Bump iOS Versions in $(sourcePath)",
@@ -53,8 +53,8 @@
             "type": "string",
             "label": "Version Name (short code)",
             "defaultValue": "1.0.$(Build.BuildId)",
-            "required": true,
-            "helpMarkDown": "The version number shown to users."
+            "required": false,
+            "helpMarkDown": "The version number shown to users (leave blank to use existing value in info.plist)."
         },
         {
             "name": "printFile",
