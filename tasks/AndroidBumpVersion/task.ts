@@ -14,7 +14,7 @@ async function run() {
         let versionName: string = tl.getInput("versionName");
         let printFile: Boolean = new Boolean(tl.getInput("printFile")).valueOf();
         
-        console.log(' (i) Provided Info.plist path:' + sourcePath);
+        console.log(" (i) Provided manifest path:" + sourcePath);
 
         if(!isNullOrUndefined(versionName))
         {
