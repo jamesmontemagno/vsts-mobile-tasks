@@ -16,6 +16,12 @@ async function run() {
         
         console.log(" (i) Provided manifest path:" + sourcePath);
 
+        // requires parameters
+        if(isNullOrUndefined(sourcePath))
+        {
+            throw new Error("[!] Missing required input: sourcePath");
+        }
+
         if(!isNullOrUndefined(versionName))
         {
             console.log(' (i) Version Name (shortcode): ' + versionName);
@@ -30,12 +36,32 @@ async function run() {
         console.log(' (i) versionCode: ' + versionCode);
 
         let xmlString: string = fs.readFileSync(sourcePath, 'utf8');
-        let xml: sam.library.XML = new sam.library.XML(xmlString);
 
         if(printFile)
         {
-            console.log('Original manifest:' + fs.readFileSync(sourcePath, 'utf8'));
+            console.log('Original manifest:' + xmlString);
         }
+
+        let start: number;
+        let end: number;
+        while ((start = xmlString.indexOf("<!--")) != -1) 
+        {
+            end = xmlString.indexOf("-->", start);
+            if (end == -1)
+                break;
+
+            console.log('Removed comments');
+
+            xmlString = xmlString.substr(0, start) + xmlString.substr(end + 3);
+
+            if(printFile)
+            {
+                console.log('Modified Original manifest:' + xmlString);
+            }
+        }
+
+        let xml: sam.library.XML = new sam.library.XML(xmlString);
+
 
         //Update package name here
         console.log( xml.hasProperty("android:versionCode") ); // true

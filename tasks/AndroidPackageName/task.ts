@@ -20,13 +20,34 @@ async function run() {
         }
 
         let xmlString: string = fs.readFileSync(sourcePath, 'utf8');
+
+        
+        let start: number;
+        let end: number;
+        while ((start = xmlString.indexOf("<!--")) != -1) 
+        {
+            end = xmlString.indexOf("-->", start);
+            if (end == -1)
+                break;
+
+            console.log('Removed comments');
+
+            xmlString = xmlString.substr(0, start) + xmlString.substr(end + 3);
+
+            if(printFile)
+            {
+                console.log('Modified Original manifest:' + xmlString);
+            }
+        }
+        
+
         
         let xml: sam.library.XML = new sam.library.XML(xmlString);
 
 
         if(printFile)
         {
-            console.log('Original manifest:' + fs.readFileSync(sourcePath, 'utf8'));
+            console.log('Original manifest:' + xmlString);
         }
 
         //Update package name here
