@@ -43,7 +43,7 @@
         {
             "name": "versionCode",
             "type": "string",
-            "label": "Version Code",
+            "label": "Version Code (CFBundleVersion)",
             "defaultValue": "$(Build.BuildId)",
             "required": true,
             "helpMarkDown": "Number to set the version code to, must be an integer."
@@ -51,7 +51,7 @@
         {
             "name": "versionName",
             "type": "string",
-            "label": "Version Name (short code)",
+            "label": "Version Name (CFBundleShortVersionString)",
             "defaultValue": "1.0.$(Build.BuildId)",
             "required": false,
             "helpMarkDown": "The version number shown to users (leave blank to use existing value in info.plist)."
