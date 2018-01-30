@@ -1,0 +1,20 @@
+{
+  "name": "helloworld",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "util": "^0.10.3",
+    "vsts-task-lib": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.5.9",
+    "@types/q": "^1.0.6"
+  }
+}
