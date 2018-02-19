@@ -30,13 +30,13 @@ async function run() {
         console.log(' (i) Bundle Identifier- bundleIdentifier: ' + bundleIdentifier);
         
         // print bundle version
-        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + sourcePath);
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + "\"" + sourcePath + "\"");
 
         // update bundle version
-        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleIdentifier " + bundleIdentifier + "\" " + sourcePath);
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleIdentifier " + bundleIdentifier + "\" " + "\"" + sourcePath + "\"");
 
          // print bundle version
-         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + sourcePath);
+         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + "\"" + sourcePath + "\"");
 
 
         if(!isNullOrUndefined(bundleName))
@@ -44,13 +44,13 @@ async function run() {
             console.log(' (i) Bunglde Name- bundleName: ' + bundleName);
 
             // print bundle version
-            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + "\"" + sourcePath + "\"");
 
             // update bundle version
-            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleName " + bundleName + "\" " + sourcePath);
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleName " + bundleName + "\" " + "\"" + sourcePath + "\"");
 
             // print bundle version
-            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + sourcePath);
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + "\"" + sourcePath + "\"");
         }
 
 
