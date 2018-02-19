@@ -48,18 +48,18 @@ async function run() {
         }
 
         // print bundle version
-        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleVersion\" " + sourcePath);
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleVersion\" " +  "\"" + sourcePath + "\"");
 
         // update bundle version
-        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleVersion " + versionCode + "\" " + sourcePath);
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleVersion " + versionCode + "\" " + "\"" + sourcePath + "\"");
 
         if(!isNullOrUndefined(versionName))
         {
             // ---- Current Bundle Short Version String:
-            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleShortVersionString\" " + sourcePath);
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleShortVersionString\" " + "\"" + sourcePath + "\"");
 
             // ---- Set Bundle Short Version String:
-            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleShortVersionString " + versionName + "\" " + sourcePath);
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleShortVersionString " + versionName + "\" " + "\"" + sourcePath + "\"");
         }
 
         if(printFile)
