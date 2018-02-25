@@ -38,7 +38,7 @@
             "label": "Bundle Identifier",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "New name to set for the identifier in the info.plist."
+            "helpMarkDown": "New name to set for the CFBundleIdentifier in the info.plist."
         },
         {
             "name": "bundleName",
@@ -46,7 +46,15 @@
             "label": "Bundle Name",
             "defaultValue": "",
             "required": false,
-            "helpMarkDown": "New name to set for the name in the info.plist."
+            "helpMarkDown": "New name to set for the CFBundleName in the info.plist."
+        },
+        {
+            "name": "bundleDisplayName",
+            "type": "string",
+            "label": "Bundle Display Name",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "New name to set for the CFBundleDisplayName in the info.plist."
         },
         {
             "name": "printFile",

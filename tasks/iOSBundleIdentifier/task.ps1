@@ -40,21 +40,21 @@ if($printFile)
     Get-Content $sourcePath | Write-Host
 }
 
-# ---- Current Bundle Version:
+# ---- Current Bundle Identifier:
 & /usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" $sourcePath
 
-# ---- Set Bundle Version:
+# ---- Set Bundle Identifier:
 & /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier $bundleIdentifier" $sourcePath
 
-# ---- New Bundle Version:
+# ---- New Bundle Identifier:
 & /usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" $sourcePath
 
 if($bundleName)
 {
-    # ---- Current Bundle Short Version String:
+    # ---- Current Bundle Name
    & /usr/libexec/PlistBuddy -c "Print CFBundleName" $sourcePath
 
-  # ---- Set Bundle Short Version String:
+  # ---- Set Bundle Name::
   & /usr/libexec/PlistBuddy -c "Set :CFBundleName $bundleName" $sourcePath   
 
   & /usr/libexec/PlistBuddy -c "Print CFBundleName" $sourcePath

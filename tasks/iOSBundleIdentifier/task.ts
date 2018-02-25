@@ -14,6 +14,7 @@ async function run() {
         let sourcePath: string = tl.getInput("sourcePath");
         let bundleIdentifier: String = tl.getInput("bundleIdentifier");
         let bundleName: String = tl.getInput("bundleName");
+        let bundleDisplayName: String = tl.getInput("bundleDisplayName");
         let printFile: Boolean = new Boolean(tl.getInput("printFile")).valueOf();
         
         // requires parameters
@@ -29,28 +30,42 @@ async function run() {
         
         console.log(' (i) Bundle Identifier- bundleIdentifier: ' + bundleIdentifier);
         
-        // print bundle version
+        // print bundle Identifier
         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + "\"" + sourcePath + "\"");
 
-        // update bundle version
+        // update bundle Identifier
         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleIdentifier " + bundleIdentifier + "\" " + "\"" + sourcePath + "\"");
 
-         // print bundle version
+         // print bundle Identifier
          tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleIdentifier\" " + "\"" + sourcePath + "\"");
 
 
         if(!isNullOrUndefined(bundleName))
         {
-            console.log(' (i) Bunglde Name- bundleName: ' + bundleName);
+            console.log(' (i) Bundle Name- bundleName: ' + bundleName);
 
-            // print bundle version
+            // print bundle name
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + "\"" + sourcePath + "\"");
 
-            // update bundle version
+            // update bundle name
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleName " + bundleName + "\" " + "\"" + sourcePath + "\"");
 
-            // print bundle version
+            // print bundle name
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleName\" " + "\"" + sourcePath + "\"");
+        }
+
+        if(!isNullOrUndefined(bundleDisplayName))
+        {
+            console.log(' (i) Bundle Display Name- bundleDisplayName: ' + bundleDisplayName);
+
+            // print bundleDisplayName
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleDisplayName\" " + "\"" + sourcePath + "\"");
+
+            // update bundleDisplayName
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleDisplayName " + bundleName + "\" " + "\"" + sourcePath + "\"");
+
+            // print bundleDisplayName
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleDisplayName\" " + "\"" + sourcePath + "\"");
         }
 
 
