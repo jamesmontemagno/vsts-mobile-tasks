@@ -62,7 +62,7 @@ async function run() {
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleDisplayName\" " + "\"" + sourcePath + "\"");
 
             // update bundleDisplayName
-            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleDisplayName " + bundleName + "\" " + "\"" + sourcePath + "\"");
+            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleDisplayName " + bundleDisplayName + "\" " + "\"" + sourcePath + "\"");
 
             // print bundleDisplayName
             tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleDisplayName\" " + "\"" + sourcePath + "\"");
