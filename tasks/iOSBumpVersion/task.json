@@ -33,20 +33,20 @@
             "helpMarkDown": "Full path to iOS info.plist file."
         },
         {
-            "name": "versionCodeOffset",
-            "type": "string",
-            "label": "Version Code Offset",
-            "defaultValue": "0",
-            "required": true,
-            "helpMarkDown": "A number to offset the version code below."
-        },
-        {
             "name": "versionCode",
             "type": "string",
             "label": "Version Code (CFBundleVersion)",
             "defaultValue": "$(Build.BuildId)",
             "required": true,
-            "helpMarkDown": "Number to set the version code to, must be an integer."
+            "helpMarkDown": "Number to set the version code to, must be an integer to use offset, else can be anything."
+        },
+        {
+            "name": "versionCodeOffset",
+            "type": "string",
+            "label": "Version Code Offset",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "A number to offset the version code below, must be an integer."
         },
         {
             "name": "versionName",

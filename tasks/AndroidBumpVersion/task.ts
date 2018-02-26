@@ -30,7 +30,13 @@ async function run() {
         if(!isNullOrUndefined(versionCodeOffset))
         {
             console.log(' (i) versionCodeOffset: ' + versionCodeOffset);
-            versionCode = String(Number(versionCode)/1 + Number(versionCodeOffset)/1);
+            let codeNum = Number(versionCode);
+            let offsetNum = Number(versionCodeOffset);
+
+            if(!isNaN(codeNum) && !isNaN(offsetNum))
+                versionCode = String(codeNum/1 + offsetNum/1);
+            else
+                console.log(' WARNING: versioncode or offset is not a number, not using offset');
         } 
 
         console.log(' (i) versionCode: ' + versionCode);

@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/tasks\\HelloWorld\\task.ts",
+            "program": "${workspaceFolder}/tasks\\AndroidBumpVersion\\task.ts",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]

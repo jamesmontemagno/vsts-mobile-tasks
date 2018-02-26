@@ -33,20 +33,20 @@
             "helpMarkDown": "Full path to android manifest file."
         },
         {
+            "name": "versionCode",
+            "type": "string",
+            "label": "Version Code (must be integer)",
+            "defaultValue": "$(Build.BuildId)",
+            "required": true,
+            "helpMarkDown": "Number to set the version code to, must be an integer  (see Android documentation)."
+        },
+        {
             "name": "versionCodeOffset",
             "type": "string",
             "label": "Version Code Offset",
             "defaultValue": "0",
-            "required": true,
-            "helpMarkDown": "A number to offset the version code below by."
-        },
-        {
-            "name": "versionCode",
-            "type": "string",
-            "label": "Version Code",
-            "defaultValue": "$(Build.BuildId)",
-            "required": true,
-            "helpMarkDown": "Number to set the version code to, must be an integer."
+            "required": false,
+            "helpMarkDown": "A number to offset the version code below by, must be an integer."
         },
         {
             "name": "versionName",
