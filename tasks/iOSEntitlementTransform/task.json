@@ -1,5 +1,5 @@
 {
-    "id": "42284b34-be85-4034-890f-8755ad9f6249",
+    "id": "75829487-759b-4344-b18c-881e7237955d",
     "name": "ios-entitlement-transform",
     "friendlyName": "iOS Entitlements Transform",
     "description": "Transform Entitlement Property of your iOS entitlements.plist file at build time.",
@@ -36,7 +36,7 @@
             "name": "property",
             "type": "string",
             "label": "Property Name",
-            "defaultValue": "$(Build.BuildId)",
+            "defaultValue": "",
             "required": true,
             "helpMarkDown": "The property that you would like to update."
         },
