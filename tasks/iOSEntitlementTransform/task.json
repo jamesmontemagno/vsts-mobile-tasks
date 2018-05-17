@@ -1,0 +1,74 @@
+{
+    "id": "42284b34-be85-4034-890f-8755ad9f6249",
+    "name": "ios-bundle-version",
+    "friendlyName": "iOS Bundle Version Numbers",
+    "description": "Bump the version of your iOS info.plist file at build time.",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "James Montemagno",
+    "visibility": [
+        "Build",
+        "Release"
+      ],
+    "version": {
+        "Major": 0,
+        "Minor": 6,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Bump iOS Versions in $(sourcePath)",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "sourcePath",
+            "type": "filePath",
+            "label": "iOS info.plist File Path",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Full path to iOS info.plist file."
+        },
+        {
+            "name": "versionCode",
+            "type": "string",
+            "label": "Version Code (CFBundleVersion)",
+            "defaultValue": "$(Build.BuildId)",
+            "required": true,
+            "helpMarkDown": "Number to set the version code to, must be an integer to use offset, else can be anything."
+        },
+        {
+            "name": "versionCodeOffset",
+            "type": "string",
+            "label": "Version Code Offset",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "A number to offset the version code below, must be an integer."
+        },
+        {
+            "name": "versionName",
+            "type": "string",
+            "label": "Version Name (CFBundleShortVersionString)",
+            "defaultValue": "1.0.$(Build.BuildId)",
+            "required": false,
+            "helpMarkDown": "The version number shown to users (leave blank to use existing value in info.plist)."
+        },
+        {
+            "name": "printFile",
+            "type": "boolean",
+            "label": "Print File",
+            "defaultValue": true,
+            "required": true,
+            "helpMarkDown": "If you would like to print the file contents before and after changing variables."
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "built/task.js",
+            "workingDirectory": "$(currentDirectory)"
+        }
+    }
+}
