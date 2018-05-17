@@ -107,6 +107,16 @@
             "properties": {
                 "name": "tasks/iOSBundleIdentifier"
             }
+        },
+        {
+            "id": "ios-entitlement-transform",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/iOSEntitlementTransform"
+            }
         }
     ]
 }
