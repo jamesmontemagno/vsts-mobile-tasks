@@ -24,12 +24,12 @@ async function run() {
             throw new Error("[!] Missing required input: sourcePath");
         }
         
-        if(!isNullOrUndefined(property))
+        if(isNullOrUndefined(property))
         {
             throw new Error("[!] Missing required input: property");    
         }
 
-        if(!isNullOrUndefined(value))
+        if(isNullOrUndefined(value))
         {
             throw new Error("[!] Missing required input: value");
         }
