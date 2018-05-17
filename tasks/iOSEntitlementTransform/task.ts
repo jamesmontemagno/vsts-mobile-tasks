@@ -12,66 +12,47 @@ async function run() {
         }
 
         let sourcePath: string = tl.getInput("sourcePath");
-        let versionCodeOffset: String = tl.getInput("versionCodeOffset");
-        let versionCode: String = tl.getInput("versionCode");
-        let versionName: String = tl.getInput("versionName");
+        let property: String = tl.getInput("property");
+        let value: String = tl.getInput("value");
         let printFile: Boolean = new Boolean(tl.getInput("printFile")).valueOf();
         
         console.log(' (i) Provided Info.plist path:' + sourcePath);
 
-         // requires parameters
-         if(isNullOrUndefined(sourcePath))
-         {
-             throw new Error("[!] Missing required input: sourcePath");
-         }
+        // requires parameters
+        if(isNullOrUndefined(sourcePath))
+        {
+            throw new Error("[!] Missing required input: sourcePath");
+        }
+        
+        if(!isNullOrUndefined(property))
+        {
+            throw new Error("[!] Missing required input: property");    
+        }
+
+        if(!isNullOrUndefined(value))
+        {
+            throw new Error("[!] Missing required input: value");
+        }
 
         if(printFile)
         {
             console.log('Original info.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
         }
 
-        if(!isNullOrUndefined(versionName))
-        {
-            console.log(' (i) Version Name (shortcode): ' + versionName);
-        }
-
-        if(!isNullOrUndefined(versionCodeOffset))
-        {
-            console.log(' (i) Build number versionCodeOffset: ' + versionCodeOffset);
-            let codeNum = Number(versionCode);
-            let offsetNum = Number(versionCodeOffset);
-
-            if(!isNaN(codeNum) && !isNaN(offsetNum))
-                versionCode = String(codeNum/1 + offsetNum/1);
-            else
-                console.log(' WARNING: versioncode or offset is not a number, not using offset');
-        }       
-
-        console.log(' (i) Build number: ' + versionCode);
-
         if(!isNullOrUndefined(printFile)){
-            console.log('Original info.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
+            console.log('Original entitlements.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
         }
 
         // print bundle version
-        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleVersion\" " +  "\"" + sourcePath + "\"");
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print " + property + "\" " +  "\"" + sourcePath + "\"");
 
         // update bundle version
-        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleVersion " + versionCode + "\" " + "\"" + sourcePath + "\"");
-
-        if(!isNullOrUndefined(versionName))
-        {
-            // ---- Current Bundle Short Version String:
-            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleShortVersionString\" " + "\"" + sourcePath + "\"");
-
-            // ---- Set Bundle Short Version String:
-            tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :CFBundleShortVersionString " + versionName + "\" " + "\"" + sourcePath + "\"");
-        }
+        tl.execSync("/usr/libexec/PlistBuddy", "-c \"Set :" + property + " " + value + "\" " + "\"" + sourcePath + "\"");
 
         if(printFile)
         {
             // todo - load plist data
-            console.log('Final info.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));
+            console.log('Final entitlements.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));
         }
     
         console.log('Task done!');
