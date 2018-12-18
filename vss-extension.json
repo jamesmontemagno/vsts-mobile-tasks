@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "motz-mobile-buildtasks",
     "name": "Mobile App Tasks for iOS and Android",
-    "version": "0.7.1",
+    "version": "0.8.0",
     "publisher": "vs-publisher-473885",
     "public" : true,
     "repository": {
@@ -33,7 +33,7 @@
         "replacement",
         "android", "ios",
         "xamarin", "xamarin.forms",
-        "package", "manifest", "info.plist"
+        "package", "manifest", "info.plist", "entitlements.plist"
     ],
     "links": {
         "home": {
@@ -65,6 +65,9 @@
         },
         {
             "path": "tasks/iOSBundleIdentifier"
+        },
+        {
+            "path": "tasks/iOSEntitlementTransform"
         }
     ],
     "contributions": [
@@ -106,6 +109,16 @@
             ],
             "properties": {
                 "name": "tasks/iOSBundleIdentifier"
+            }
+        },
+        {
+            "id": "ios-entitlement-transform",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/iOSEntitlementTransform"
             }
         }
     ]

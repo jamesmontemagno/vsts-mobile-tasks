@@ -1,0 +1,66 @@
+{
+    "id": "75829487-759b-4344-b18c-881e7237955d",
+    "name": "ios-entitlement-transform",
+    "friendlyName": "iOS Entitlements Transform",
+    "description": "Transform Entitlement Property of your iOS entitlements.plist file at build time.",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Andrew Hoefling",
+    "visibility": [
+        "Build",
+        "Release"
+      ],
+    "version": {
+        "Major": 0,
+        "Minor": 6,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Transform Entitlements Property in $(sourcePath)",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "sourcePath",
+            "type": "filePath",
+            "label": "iOS entitlements.plist File Path",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Full path to iOS entitlements.plist file."
+        },
+        {
+            "name": "property",
+            "type": "string",
+            "label": "Property Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The property that you would like to update."
+        },
+        {
+            "name": "value",
+            "type": "string",
+            "label": "Value",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "The new value to insert into the Entitlment Property."
+        },
+        {
+            "name": "printFile",
+            "type": "boolean",
+            "label": "Print File",
+            "defaultValue": true,
+            "required": true,
+            "helpMarkDown": "If you would like to print the file contents before and after changing variables."
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "built/task.js",
+            "workingDirectory": "$(currentDirectory)"
+        }
+    }
+}
