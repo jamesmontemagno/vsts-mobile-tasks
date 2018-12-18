@@ -1,0 +1,31 @@
+{
+  "name": "vsts-mobile-tasks",
+  "version": "8.0.0",
+  "description": "Tasks for building ios and android applications in VSTS.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesmontemagno/vsts-mobile-tasks.git"
+  },
+  "author": "Jame Montemagno &amp; Andrew Hoefling",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamesmontemagno/vsts-mobile-tasks/issues"
+  },
+  "homepage": "https://github.com/jamesmontemagno/vsts-mobile-tasks#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^10.1.0",
+    "@types/samchon-framework": "^2.0.21",
+    "fs": "0.0.1-security",
+    "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
+    "gulp-typescript": "^4.0.2",
+    "require-dir": "^1.0.0",
+    "typescript": "^2.8.3",
+    "vsts-task-lib": "^2.4.0"
+  }
+}
