@@ -7,8 +7,44 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Android Bump Versions",
             "program": "${workspaceFolder}/tasks\\AndroidBumpVersion\\task.ts",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Android Package Name",
+            "program": "${workspaceFolder}/tasks\\AndroidPackageName\\task.ts",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "iOS Bump Verions",
+            "program": "${workspaceFolder}/tasks\\iOSBumpVersion\\task.ts",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "iOS Bundle Identifier",
+            "program": "${workspaceFolder}/tasks\\iOSBundleIdentifier\\task.ts",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "iOS Entitlement Transform",
+            "program": "${workspaceFolder}/tasks\\iOSEntitlementTransform\\task.ts",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]

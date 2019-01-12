@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "motz-mobile-buildtasks",
     "name": "Mobile App Tasks for iOS and Android",
-    "version": "0.8.0",
+    "version": "1.0.5",
     "publisher": "vs-publisher-473885",
     "public" : true,
     "repository": {
@@ -14,9 +14,9 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],    
-    "description": "Tasks for building ios and android applications in VSTS.",
+    "description": "Tasks for building ios and android applications in Azure DevOps(VSTS).",
     "categories": [
-        "Build and release"
+        "Azure Pipelines"
     ],
     "content": {
         "details": {

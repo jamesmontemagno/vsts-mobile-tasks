@@ -11,8 +11,8 @@
         "Release"
       ],
     "version": {
-        "Major": 0,
-        "Minor": 6,
+        "Major": 1,
+        "Minor": 0,
         "Patch": 0
     },
     "instanceNameFormat": "Bump Android Versions in $(sourcePath)",
@@ -33,11 +33,25 @@
             "helpMarkDown": "Full path to android manifest file."
         },
         {
+            "name": "versionCodeOption",
+            "type": "pickList",
+            "label": "Version Code Format",
+            "required": true,
+            "defaultValue": "buildid",
+            "options":
+            {
+                "buildid": "User Defined/Build Id",
+                "timestamp": "Unix timestamp in seconds"
+            },
+            "helpMarkDown": "Select the type of version code format that you would like to use. Selecting timestamp ignores the version code."
+        },
+        {
             "name": "versionCode",
             "type": "string",
             "label": "Version Code (must be integer)",
             "defaultValue": "$(Build.BuildId)",
             "required": true,
+            "visibleRule": "versionCodeOption == buildid",
             "helpMarkDown": "Number to set the version code to, must be an integer  (see Android documentation)."
         },
         {
@@ -46,6 +60,7 @@
             "label": "Version Code Offset",
             "defaultValue": "0",
             "required": false,
+            "visibleRule": "versionCodeOption == buildid",
             "helpMarkDown": "A number to offset the version code below by, must be an integer."
         },
         {

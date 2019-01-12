@@ -1,5 +1,5 @@
-import tl = require('vsts-task-lib/task');
-import trm = require('vsts-task-lib/toolrunner');
+import tl = require('azure-pipelines-task-lib/task');
+import trm = require('azure-pipelines-task-lib/toolrunner');
 import fs = require('fs');
 import { isNullOrUndefined } from 'util';
 
@@ -36,11 +36,7 @@ async function run() {
 
         if(printFile)
         {
-            console.log('Original info.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
-        }
-
-        if(!isNullOrUndefined(printFile)){
-            console.log('Original entitlements.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
+            console.log('Original Plist:' + fs.readFileSync(sourcePath, 'utf8'));
         }
 
         // print bundle version
@@ -52,7 +48,7 @@ async function run() {
         if(printFile)
         {
             // todo - load plist data
-            console.log('Final entitlements.Plist: ' + fs.readFileSync(sourcePath, 'utf8'));
+            console.log('Final Plist: ' + fs.readFileSync(sourcePath, 'utf8'));
         }
     
         console.log('Task done!');

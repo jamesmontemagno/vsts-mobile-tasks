@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "vsts-task-lib": "^2.1.0"
+    "azure-pipelines-task-lib": "^2.7.7"
   },
   "devDependencies": {
     "@types/node": "^8.5.1",

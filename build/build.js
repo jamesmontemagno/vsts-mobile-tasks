@@ -13,7 +13,7 @@ var buildProject = function(name){
         .js.pipe(gulp.dest("./tasks/" + name + "/built"));
 };
 
-gulp.task('iOSBUndleIdentifier', function(){
+gulp.task('iOSBundleIdentifier', function(){
     return buildProject("iOSBundleIdentifier");
 });
 
@@ -33,6 +33,6 @@ gulp.task('iOSEntitlementTransform', function(){
     return buildProject("iOSEntitlementTransform");
 });
 
-gulp.task('build', ['iOSBUndleIdentifier', 'iOSBumpVersion', 'AndroidBumpVersion', 'AndroidPackageName', 'iOSEntitlementTransform'], function(){
+gulp.task('build', ['iOSBundleIdentifier', 'iOSBumpVersion', 'AndroidBumpVersion', 'AndroidPackageName', 'iOSEntitlementTransform'], function(){
     return null;
 });

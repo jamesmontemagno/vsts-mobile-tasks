@@ -1,18 +1,18 @@
 {
     "id": "75829487-759b-4344-b18c-881e7237955d",
     "name": "ios-entitlement-transform",
-    "friendlyName": "iOS Entitlements Transform",
-    "description": "Transform Entitlement Property of your iOS entitlements.plist file at build time.",
+    "friendlyName": "iOS PList Property Transform",
+    "description": "Transform a Property of your iOS .plist file at build time.",
     "helpMarkDown": "",
     "category": "Utility",
-    "author": "Andrew Hoefling",
+    "author": "James Montemagno and Andrew Hoefling",
     "visibility": [
         "Build",
         "Release"
       ],
     "version": {
-        "Major": 0,
-        "Minor": 6,
+        "Major": 1,
+        "Minor": 0,
         "Patch": 0
     },
     "instanceNameFormat": "Transform Entitlements Property in $(sourcePath)",
@@ -27,10 +27,10 @@
         {
             "name": "sourcePath",
             "type": "filePath",
-            "label": "iOS entitlements.plist File Path",
+            "label": "iOS .plist File Path",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Full path to iOS entitlements.plist file."
+            "helpMarkDown": "Full path to iOS .plist file."
         },
         {
             "name": "property",

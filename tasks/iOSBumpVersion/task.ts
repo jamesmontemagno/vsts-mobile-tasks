@@ -1,5 +1,5 @@
-import tl = require('vsts-task-lib/task');
-import trm = require('vsts-task-lib/toolrunner');
+import tl = require('azure-pipelines-task-lib/task');
+import trm = require('azure-pipelines-task-lib/toolrunner');
 import fs = require('fs');
 import { isNullOrUndefined } from 'util';
 
@@ -12,9 +12,10 @@ async function run() {
         }
 
         let sourcePath: string = tl.getInput("sourcePath");
-        let versionCodeOffset: String = tl.getInput("versionCodeOffset");
-        let versionCode: String = tl.getInput("versionCode");
-        let versionName: String = tl.getInput("versionName");
+        let versionCodeOffset: string = tl.getInput("versionCodeOffset");
+        let versionCodeOption: string = tl.getInput("versionCodeOption");
+        let versionCode: string = tl.getInput("versionCode");
+        let versionName: string = tl.getInput("versionName");
         let printFile: Boolean = new Boolean(tl.getInput("printFile")).valueOf();
         
         console.log(' (i) Provided Info.plist path:' + sourcePath);
@@ -30,28 +31,39 @@ async function run() {
             console.log('Original info.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
         }
 
+        
         if(!isNullOrUndefined(versionName))
         {
             console.log(' (i) Version Name (shortcode): ' + versionName);
         }
-
-        if(!isNullOrUndefined(versionCodeOffset))
+            
+        if(versionCodeOption == "buildid")
         {
-            console.log(' (i) Build number versionCodeOffset: ' + versionCodeOffset);
-            let codeNum = Number(versionCode);
-            let offsetNum = Number(versionCodeOffset);
+            console.log(' (i) Using Custom Defined Version Code and adjusting for offset if needed.');
 
-            if(!isNaN(codeNum) && !isNaN(offsetNum))
-                versionCode = String(codeNum/1 + offsetNum/1);
-            else
-                console.log(' WARNING: versioncode or offset is not a number, not using offset');
-        }       
+            if(!isNullOrUndefined(versionCodeOffset))
+            {
+                console.log(' (i) Build number versionCodeOffset: ' + versionCodeOffset);
+                let codeNum = Number(versionCode);
+                let offsetNum = Number(versionCodeOffset);
+
+                if(!isNaN(codeNum) && !isNaN(offsetNum))
+                    versionCode = String(codeNum/1 + offsetNum/1);
+                else
+                    console.log(' WARNING: versioncode or offset is not a number, not using offset');
+            }    
+        }   
+        else
+        {
+            console.log(' (i) Using timestamp for the version code. ');
+            var time = new Date().getTime();
+            var seconds = time / 1000 | 0;
+            console.log(' (i) Current time: ' + time + ' | Timestamp: ' + seconds);            
+
+            versionCode = String(seconds);
+        }
 
         console.log(' (i) Build number: ' + versionCode);
-
-        if(!isNullOrUndefined(printFile)){
-            console.log('Original info.Plist:' + fs.readFileSync(sourcePath, 'utf8'));
-        }
 
         // print bundle version
         tl.execSync("/usr/libexec/PlistBuddy", "-c \"Print CFBundleVersion\" " +  "\"" + sourcePath + "\"");
