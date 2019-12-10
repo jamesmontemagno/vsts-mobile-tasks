@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "motz-mobile-buildtasks",
     "name": "Mobile App Tasks for iOS and Android",
-    "version": "1.0.6",
+    "version": "1.0.8",
     "publisher": "vs-publisher-473885",
     "public" : true,
     "repository": {
@@ -112,7 +112,7 @@
             }
         },
         {
-            "id": "ios-entitlement-transform",
+            "id": "motz-ios-entitlement-transform",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"

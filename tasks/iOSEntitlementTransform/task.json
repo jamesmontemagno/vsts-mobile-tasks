@@ -1,6 +1,6 @@
 {
-    "id": "75829487-759b-4344-b18c-881e7237955d",
-    "name": "ios-entitlement-transform",
+    "id": "70f13f67-6ba7-48a3-94c6-bbbecd9caa19",
+    "name": "motz-ios-entitlement-transform",
     "friendlyName": "iOS PList Property Transform",
     "description": "Transform a Property of your iOS .plist file at build time.",
     "helpMarkDown": "",
