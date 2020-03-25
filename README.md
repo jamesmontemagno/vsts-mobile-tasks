@@ -47,7 +47,7 @@ Change app's bundle name and identifier
 
 Inputs:
 
-* sourcePath: Path to android manifest
+* sourcePath: Path to info.plist
 * bundleIdenifier: identiier to replace (com.company.app)
 * bundleName: name to replace (App Name)
 * printFile: output the file before and after changing variables
