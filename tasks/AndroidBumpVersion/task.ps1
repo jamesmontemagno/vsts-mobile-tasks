@@ -1,89 +1,71 @@
-Param(
-  [string]$sourcePath,
-  [string]$versionCodeOffset,
-  [string]$versionCode,
-  [string]$versionName,
-  [bool]$printFile
+
+
+param (
+    [Parameter(Mandatory)]
+    [string]
+    $ManifestPath,
+
+    # manual, long-term adjustment to build id or whatever
+    [Parameter(Mandatory)]
+    [int]
+    $VersionCodeBase,
+
+    # the value that increases each time
+    [Parameter(Mandatory)]
+    [int]
+    $VersionCodeOffset,
+
+    [Parameter(Mandatory)]
+    [string]
+    $VersionName,
+
+    [bool]
+    $PrintFile = $false
 )
 
-# requies parameters
-if(!$sourcePath)
-{
-    write-host " [!] Missing required input: sourcePath"
-    exit 1
-} 
+[int] $versionCode = $VersionCodeBase + $VersionCodeOffset
 
-if(!(Test-Path $sourcePath))
-{
-    Write-Host " [!] File doesn't exist at specified Android Manifest path: $sourcePath"
-    exit 1
+Write-Output "ENVIRONMENT VARIABLES ----------"
+Write-Output "Build_BuildId:      $env:Build_BuildId"
+Write-Output "Build_BuildNumber:  $env:Build_BuildNumber"
+Write-Output "SCRIPT VARIABLES ---------------"
+Write-Output "ManifestPath:       $ManifestPath"
+Write-Output "VersionCodeBase:    $VersionCodeBase"
+Write-Output "VersionCodeOffset:  $VersionCodeOffset"
+Write-Output "calced versionCode: $versionCode"
+Write-Output "VersionName:        $VersionName"
+
+[xml] $manifest = Get-Content -Path $ManifestPath
+
+function Select-ManifestAttribute {
+    param
+        ( [Parameter(Mandatory)] [xml] $manifestDoc
+        , [Parameter(Mandatory)] [string] $attributeName
+        )
+    $namespaces = @{android="http://schemas.android.com/apk/res/android"}
+    $commonXpath = "/manifest/@android:"
+    return Select-Xml -xml $manifestDoc -Xpath "$commonXpath$attributeName" -namespace $namespaces
 }
 
-if(!$versionCodeOffset)
+$manifestVersionCode = Select-ManifestAttribute $manifest "versionCode"
+$manifestVersionName = Select-ManifestAttribute $manifest "versionName"
+
+Write-Output "OLD MANIFEST VALUES ------------"
+Write-Output "Old version code: $($manifestVersionCode.Node.Value)"
+Write-Output "Old version name: $($manifestVersionName.Node.Value)"
+
+if($PrintFile)
 {
-    Write-Host " [!] No versionCodeOffset specified!"
-    exit 1
+    Write-Output "ORIGINAL MANIFEST --------------"
+    Get-Content $ManifestPath | Write-Output
 }
 
-if(!$versionCode)
+$manifestVersionCode.Node.Value = $versionCode
+$manifestVersionName.Node.Value = $VersionName
+$manifest.Save($ManifestPath)
+
+if($PrintFile)
 {
-    Write-Host " [!] No versionCode specified!"
-    exit 1
-}
-
-if(!$versionName)
-{
-    Write-Host " [!] No versionName specified!"
-    exit 1
-}
-
-# ---------------------
-# --- Configs:
-Write-Host " (i) Provided Android Manifest path: $sourcePath"
-
-
-Write-Host " (i) New versionCodeOffset: $versionCodeOffset"    
-
-Write-Host " (i) New versionCode: $versionCode"  
-
-Write-Host " (i) New versionName: $versionName"  
-
-$final_code = $versionCodeOffset/1 + $versionCode/1
-
-
- # Load the bootstrap file
- [xml] $xam = Get-Content -Path $sourcePath
- 
- # Get the version from Android Manifest
- $CODE = Select-Xml -xml $xam  -Xpath "/manifest/@android:versionCode" -namespace @{android="http://schemas.android.com/apk/res/android"}
-
- $NAME = Select-Xml -xml $xam  -Xpath "/manifest/@android:versionName" -namespace @{android="http://schemas.android.com/apk/res/android"}
-
- $old_code = $CODE.Node.Value;
-
- $old_name = $NAME.Node.Value;
-
- Write-Host " (i) Old version code: $old_code"  
-
- Write-Host " (i) Old version name: $old_name"  
-
-# ---------------------
-# --- Main:
-
-if($printFile)
-{
-    Write-Host "Original Manifest:"
-    Get-Content $sourcePath | Write-Host
-}
-
-$NAME.Node.Value = $final_code
-
-$NAME.Node.Value = $versionName
-
-$xam.Save($sourcePath)
-
-if($printFile)
-{
-    Write-Host "Final Manifest:"
-    Get-Content $sourcePath | Write-Host
+    Write-Output "FINAL MANIFEST -----------------"
+    Get-Content $ManifestPath | Write-Output
 }
