@@ -66,7 +66,7 @@
         }
     ],
     "execution": {
-        "Node": {
+        "Node10": {
             "target": "built/task.js",
             "workingDirectory": "$(currentDirectory)"
         }
